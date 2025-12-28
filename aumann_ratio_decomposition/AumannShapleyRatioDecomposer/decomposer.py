@@ -1032,7 +1032,9 @@ class AumannShapleyRatioDecomposer:
                 for h in bar_handles:
                     handles2.append(h[0])
                     labels2.append(h.get_label())
-                handles2.append(h_res[0]); labels2.append("Residual")
+                if len(h_res) > 0:
+                    handles2.append(h_res[0])
+                    labels2.append("Residual")
 
                 fig.legend(
                     handles2, labels2,

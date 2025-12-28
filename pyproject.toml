@@ -13,6 +13,7 @@ dependencies = [
   "matplotlib>=3.5",
   "seaborn>=0.12",
   "pysubgroup>=0.7",
+  "jupyter>=1.0",
 ]
 
 [tool.setuptools.packages.find]
