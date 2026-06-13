@@ -770,6 +770,8 @@ class AumannShapleyRatioDecomposer:
         ratio_ylim = None,
         shap_ylim = None,
         legend_ncol: int = 6,
+        ratio_before_label: str = "ratio_before",
+        ratio_after_label: str = "ratio_after",
     ):
         """Plot ratio transitions and Shapley decomposition as a stacked bar chart.
 
@@ -811,6 +813,10 @@ class AumannShapleyRatioDecomposer:
             (secondary axis).  If None (default), auto-scale.
         legend_ncol : int, optional
             Number of columns to use in the stacked bar legend.
+        ratio_before_label : str, default "ratio_before"
+            Legend label for the before-ratio line.
+        ratio_after_label : str, default "ratio_after"
+            Legend label for the after-ratio line.
         Returns
         -------
         tuple
@@ -843,7 +849,9 @@ class AumannShapleyRatioDecomposer:
         >>> #     Be careful: if there are many combinations, many charts will be generated.
         >>> decomposer.plot_ratio_with_shapley_stacked(
         ...     x_key="month",
-        ...     decompose_keys=["product"]
+        ...     decompose_keys=["product"],
+        ...     ratio_before_label="Current ratio",
+        ...     ratio_after_label="Projected ratio"
         ... )
         """
 
@@ -969,8 +977,20 @@ class AumannShapleyRatioDecomposer:
             fig, ax1 = plt.subplots(figsize=figsize)
 
             # Plot ratio lines
-            l1, = ax1.plot(x_vals, grp_ratio["ratio_bef"], marker='o', label='ratio_bef', zorder=4)
-            l2, = ax1.plot(x_vals, grp_ratio["ratio_aft"], marker='o', label='ratio_aft', zorder=4)
+            l1, = ax1.plot(
+                x_vals,
+                grp_ratio["ratio_bef"],
+                marker='o',
+                label=ratio_before_label,
+                zorder=4,
+            )
+            l2, = ax1.plot(
+                x_vals,
+                grp_ratio["ratio_aft"],
+                marker='o',
+                label=ratio_after_label,
+                zorder=4,
+            )
 
             # Optional vertical separators
             if vline:
