@@ -1040,7 +1040,8 @@ class AumannShapleyRatioDecomposer:
                     color=residual_color, edgecolor="gray", linewidth=0.4,
                     alpha=0.9, label="Residual", zorder=2
                 )
-                ax2.set_ylabel("Shapley contribution", fontsize=11)
+                contribution_name = "Aumann–Shapley" if shapley_col == "aumann_shapley" else "Shapley"
+                ax2.set_ylabel(f"{contribution_name} contribution", fontsize=11)
 
                 if shap_ylim is not None:
                     ax2.set_ylim(*shap_ylim)
@@ -1082,7 +1083,8 @@ class AumannShapleyRatioDecomposer:
             if fks:
                 filter_str = " | " + ", ".join(f"{k}={v}" for k, v in fks.items())
             if decompose_keys:
-                title = f"Ratio transition & Shapley decomposition\nby {decompose_key}{filter_str}"
+                contribution_name = "Aumann–Shapley" if shapley_col == "aumann_shapley" else "Shapley"
+                title = f"Ratio transition & {contribution_name} decomposition\nby {decompose_key}{filter_str}"
             else:
                 title = f"Ratio transition by {filter_str}"
             ax1.set_title(title, fontsize=14, fontweight="bold")
